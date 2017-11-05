@@ -22,10 +22,10 @@ class DevConfig(Config):
     '''
     development configuration child class
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://khalid:pythonista@localhost/oneminutepitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://khalid:pythonista@localhost/mypersonal'
     DEBUG = True
 
 config_options = {
 'development':DevConfig,
-'production':ProdConfig
+'production':ProdConfig         
 }

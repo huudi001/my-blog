@@ -14,11 +14,11 @@ class User(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
-    #role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
-    password_hash = db.Column(db.String(255))
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    pass_secure = db.Column(db.String(255))
 
-    #def __repr__(self):
-        #Sreturn  {self.username}
+    def __repr__(self):
+        return  {self.username}
 
 
     @property
@@ -34,3 +34,10 @@ class User(db.Model):
 
     def __repr__(self):
         return  {self.name}
+
+class Post(db.Model):
+    __table__name = 'posts'
+    id = db.Column(db.Integer,primary_key = True)
+    post_body = db.Column(db.String(255))
+    post_title = db.Column(db.String(255))
+    user_id= db.Column(db.Integer, db.ForeignKey("users.id") )
