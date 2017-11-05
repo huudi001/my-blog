@@ -1,12 +1,20 @@
-{% macro displayPosts(post_list) %}
-    {% for post in post_list %}
-        <div class="well col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-            <div>
-                <div>
-                </div>
-                <div class="col-md-6 col-lg-6">
-                    <h4>{{post.post_body}}</h4>
-                </div>
-              </div>
-      {% endfor %}
-  {% endmacro %}
+{% extends 'bootstrap/base.html' %}
+
+<!-- Display all the blogs -->
+{% macro displayPosts(post_list)%}
+    {% for post in post_list%}
+  <div class="container">
+      <h2><a href="/blog/{{blog.id}}">{{post.title }}</a></h2>
+      <h4>{{post.content}}</h4>
+     By:{{ post.user.username }}
+
+</div>
+{% endfor %}
+
+
+{% endmacro %}
+{% macro displaySinglePost(single_post_list) %} {% for comment in single_post_list %}
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+  <hr> {{comment.comment_section}}
+</div>
+{% endfor %}{% endmacro %}
