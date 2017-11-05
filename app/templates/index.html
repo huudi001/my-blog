@@ -1,19 +1,11 @@
-{% extends 'base.html' %}
-{% import 'macros.html' as macro %}
+{% extends 'base.html' %} {% import 'macros.html' as macro %}
 
-{% block navbar %}
-   {% include 'navbar.html' %}
-{% endblock %}
+<!-- Styles block -->
 
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
 
-
+<!-- Content block -->
 {% block content %}
-    <div class="container">
-        <div class="row welcome">
-            <h1 id="title-home">new Posts</h1>
-            <ul class="category-list text-center">
-              {{macro.displayPosts(posts)}}
-           </ul>
-        </div>
-    </div>
-{% endblock %}
+<h4>python blog</h4> {{ macro.displayPosts(post) }}
+<p class="text-right"><a class="btn btn-primary" href="/post/new/{{post.id}}"></a> {% endblock %}
