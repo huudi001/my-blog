@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% import 'macros.html' as macro %}
+
+ {% block style %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+<!-- block content -->
+{% block content %}
+ {{ post.title }}
+<div class="container">
+  {{ post.content }}
+  <h4>Comments:</h4>
+  {% if comment %}
+
+      {{ macro.displaySinglepost(comment)}}
+  <hr> {%else%}
+       <h3 class="text-center">No comment yet </h3>{% endif %}
+       <p class="text-right"><a class="btn btn-primary" href="/post/new/{{post.id}}">Add a comment</a></p>
+</div>{% endblock %}
