@@ -1,15 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,SelectField
+from wtforms import StringField,TextAreaField,SubmitField
 from wtforms.validators import Required
 
 class CommentForm(FlaskForm):
-
-    title = StringField('Feedback title',validators=[Required()])
-    comment = TextAreaField(' feedback', validators=[Required()])
+    comment_content =  TextAreaField('Comment', validators=[Required()])
     submit = SubmitField('Submit')
 
-
-class PostForm(FlaskForm):
-    title = StringField('Pitch title',validators=[Required()])
-    body= TextAreaField('Pitch body', validators=[Required()])
+class ArticleForm(FlaskForm):
+    article_title = StringField('article Title')
+    article_content = TextAreaField('article Content')
     submit = SubmitField('Submit')

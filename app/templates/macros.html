@@ -1,20 +1,165 @@
-{% extends 'bootstrap/base.html' %}
 
-<!-- Display all the blogs -->
-{% macro displayPosts(post_list)%}
-    {% for post in post_list%}
-  <div class="container">
-      <h2><a href="/blog/{{blog.id}}">{{post.title }}</a></h2>
-      <h4>{{post.content}}</h4>
-     By:{{ post.user.username }}
+{% macro displayArticleList(article_list) %}
 
-</div>
-{% endfor %}
+    {% for article in article_list %}
+        <div class="row">
 
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-8 col-lg-8 >
+
+                <li class="text-center">
+
+                    <h3>
+
+                        <a href="/article/{{article.id}}">
+                            {{ article.article_title }}
+                        </a>
+
+                        <br>
+
+                        <small>
+                            author{{ article.user.username }}
+                        </small>
+
+                    </h3>
+
+                </li>
+
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+        </div>
+
+    {% endfor %}
 
 {% endmacro %}
-{% macro displaySinglePost(single_post_list) %} {% for comment in single_post_list %}
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
-  <hr> {{comment.comment_section}}
-</div>
-{% endfor %}{% endmacro %}
+{% macro displayCommentList(comment_list) %}
+
+
+    {% for comment in comment_list %}
+        <div class="row">
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-8 col-lg-8 well comment-well">
+
+                <li>
+
+                    <h4 class="comment-content">
+
+                        {{ comment.comment_content}}
+
+                        <br>
+
+                        <small class="comment-author"> by {{ comment.user.username }} </small>
+
+                    </h4>
+
+                </li>
+
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endmacro %}
+
+
+{% macro displayArticleListBlogger(article_list) %}
+
+    {% for article in article_list %}
+        <div class="row">
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-8 col-lg-8 well post-well">
+
+                <li class="text-center">
+
+                    <h3 class="post-title">
+
+                        <a href="/writer/post/{{post.id}}">
+                            {{ article.article_title }}
+                        </a>
+
+                        <br>
+
+                        <small>
+                            author {{ article.user.username }}
+                        </small>
+
+                    </h3>
+
+                </li>
+
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endmacro %}
+
+<!-- Display comments -->
+{% macro displayCommentListWriter(comment_list) %}
+
+
+    {% for comment in comment_list %}
+        <div class="row">
+
+            <div class="col-md-2 col-lg-2">
+
+            </div>
+
+            <div class=" col-xs-12 col-sm-12 col-md-8 col-lg-8 well comment-well">
+
+                <li>
+
+                    <h4 class="comment-content">
+
+                        {{ comment.comment_content}}
+
+                        <br>
+
+                        <small class="comment-author"> by {{ comment.user.username }} </small>
+
+                    </h4>
+
+                </li>
+
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+
+                <h4>
+                    <a href="/writer/post/comment/delete/{{comment.id}}">
+                        Delete Comment
+                    </a>
+                </h4>
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endmacro %}

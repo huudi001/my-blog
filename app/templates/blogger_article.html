@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+
+<!-- Content block -->
+{% block content %}
+
+    <title> {{ title }} </title>
+
+    <div class="container">
+
+        <h2>
+            {{ article.article_title }}
+            <br>
+            <small>
+                author {{ article.user.username }}
+            </small>
+        </h2>
+
+        <p>
+            {{ format_article | safe }}
+        </p>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md4 col-lg-4">
+
+                <h3>
+
+                    <a href="/blogger/article/update/{{article.id}}">
+                        Update Post
+                    </a>
+
+                </h3>
+
+            </div>
+
+            <div class="col-md4 col-lg-4">
+
+            </div>
+
+            <div class="col-md4 col-lg-4">
+
+                <h3>
+
+                    <a href="/bloger/article_content/delete/{{article.id}}">
+                        Delete Post
+                    </a>
+
+                </h3>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-4 col-lg-4">
+
+                <h3>Comments</h3>
+
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+
+            </div>
+
+            <div class="col-md-4 col-lg-">
+
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <ul class="list-unstyled">
+            {{ macro.displayCommentListBlogger(comments) }}
+        </ul>
+
+
+
+    </div>
+
+{% endblock %}

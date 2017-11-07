@@ -15,14 +15,22 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                   {% if current_user.is_authenticated %}
+                       <li> <h4> {{current_user.username}} </h4> </li>
+
+                  {% if current_user.subscribe == False and current_user.role_id == 2 %}
+                       <li>
+                         <h5>
+                             <a href="/register/{{current_user.id}}"> Register </a>
+                         </h5>
+                      </li>
+                  {% endif %}
                   <li>{{current_user.username}}</li>
                   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                   {% else %}
                  <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-                 <li><a href="authenticate/register">register</a></li>
 
                   {%endif%}
-                  
+
 
 
 

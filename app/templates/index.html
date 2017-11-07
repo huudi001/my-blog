@@ -1,7 +1,22 @@
-{% extends 'base.html' %} {% import 'macros.html' as macro %}
-
-
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
 
 {% block content %}
-<h4>python blog</h4> {{ macro.displayPosts(post) }}
-<p class="text-right"><a class="btn btn-primary" href="/post/new/{{post.id}}"></a> {% endblock %}
+
+    <title> {{ title }} </title>
+
+    <div class="container">
+
+        <h3 class="index-header">List of Articles</h3>
+
+        <hr>
+
+        <ul >
+            {{ macro.displayArticleList(posts)}}
+        </ul>
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,19 +1,58 @@
-{% extends 'base.html' %}{% import 'macros.html' as macro %}
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
 
- {% block style %}
-{{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-{% endblock %}
-<!-- block content -->
+
+<!-- Content block -->
 {% block content %}
- {{ post.title }}
-<div class="container">
-  {{ post.content }}
-  <h4>Comments:</h4>
-  {% if comment %}
 
-      {{ macro.displaySinglepost(comment)}}
-  <hr> {%else%}
-       <h3 class="text-center">No comment yet </h3>{% endif %}
-       <p class="text-right"><a class="btn btn-primary" href="/post/new/{{post.id}}">Add a comment</a></p>
-</div>{% endblock %}
+    <title> {{ title }} </title>
+
+    <div>
+
+        <h2>
+            {{ article.article_title }}
+            <br>
+            <small>
+                author {{ article.user.username }}
+            </small>
+        </h2>
+
+        <p>
+            {{ format_article | safe }}
+        </p>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-4 col-lg-4">
+
+                <h3>Comments</h3>
+
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+
+            </div>
+
+            <div class="col-md-4 col-lg-">
+
+                <h3>
+                    <a href="/post/comment/new/{{article.id}}">
+                        Add Comment
+                    </a>
+                </h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <ul>
+            {{ macro.displayCommentList(comments) }}
+        </ul>
+
+
+
+    </div>
+
+{% endblock %}
