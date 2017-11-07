@@ -31,7 +31,7 @@ class User(UserMixin,db.Model):
     # id column that is the primary key
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True, index)
+    email = db.Column(db.String(255), unique=True,index=True)
     password_hash = db.Column(db.String(255))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
@@ -128,7 +128,7 @@ class Comment(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_comments(cls,post_id):
+    def get_comments(cls,article_id):
 
         comments = Comment.query.filter_by(article_id=article_id).all()
 

@@ -1,34 +1,27 @@
-import os
+from app import create_app, db
+from flask_script import Manager, Server
+from app.models import User, Role,Article,Comment
+from flask_migrate import Migrate, MigrateCommand
 
-class Config:
-    '''
-    General configuration parent class
-    '''
-
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://khalid:pythonista@localhost/codeblog'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    SIMPLEMDE_JS_IIFE = True
-class ProdConfig(Config):
-    '''
-    Production  configuration child class
-    Args:
-        Config: The parent configuration class with General configuration settings
-    '''
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+# create app instance
+app =  create_app('development')
 
 
-class DevConfig(Config):
-    '''
-    Development  configuration child class
-    Args:
-        Config: The parent configuration class with General configuration settings
-    '''
+manager = Manager(app)
+manager.add_command('server', Server)
+@manager.command
+def test():
+    '''run utitest'''
+    import unittest
+    tests = unittest.TestLoader().discover('test')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
+@manager.shell
+def make_shell_context():
+    return dict(app = app, db = db, User = User, Article= Article, Comment = Comment, Role= Role)
 
+migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
 
-    DEBUG = True
-config_options = {
-'development':DevConfig,
-'production':ProdConfig
-}
+if __name__ == '__main__':
+    manager.run()

@@ -4,24 +4,28 @@ class Config:
     '''
     General configuration parent class
     '''
-
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://khalid:pythonista@localhost/codeblog'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://khalid:pythonista@localhost/bloger'
 
-    SIMPLEMDE_JS_IIFE = True
-    SIMPLEMDE_USE_CDN = True
 
 
 class ProdConfig(Config):
+    '''
+    Production  configuration child class
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    Args:
+        Config: The parent configuration class with General configuration settings
+    '''
+    pass
 
 
 class DevConfig(Config):
+    '''
+    Development  configuration child class
 
-
-
+    Args:
+        Config: The parent configuration class with General configuration settings
+    '''
 
     DEBUG = True
 

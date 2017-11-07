@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
-from ..models import User,Role,Post,Comment
-from .forms import CommentForm,PostForm
+from ..models import User,Role,Article,Comment
+from .forms import CommentForm,ArticleForm
 from flask_login import login_required,current_user
 from datetime import datetime, timezone
 from .. import db
@@ -27,7 +27,7 @@ def article(id):
 
     format_articles= markdown2.markdown(article.article_content,extras=["code-friendly", "fenced-code-blocks"])
 
-    return render_template('article.html', title=title, article=article comments=comments, format_articles=format_articles )
+    return render_template('article.html', title=title, article = article, comments=comments, format_articles=format_articles )
 
 @main.route('/article/comment/new/<int:id>', methods=['GET','POST'])
 @login_required
